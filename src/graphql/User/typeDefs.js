@@ -11,11 +11,17 @@ export const typeDefs = gql`
     bucket: String
   }
 
+  type LoginResponse {
+    token: String
+    user: User
+  }
+
   extend type Query {
     users: [User]
   }
 
   extend type Mutation {
     register(email: String, displayName: String, password: String): User
+    login(email: String, password: String): LoginResponse
   }
 `;
