@@ -7,11 +7,11 @@ export const typeDefs = gql`
     author: String
   }
 
-  type Query {
+  extend type Query {
     books: [Book]
   }
 
-  type Mutation {
+  extend type Mutation {
     createBook(title: String, content: String, author: String): Book
   }
 `;

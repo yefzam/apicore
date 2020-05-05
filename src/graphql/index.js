@@ -1,7 +1,23 @@
+import { merge } from 'lodash';
+import { makeExecutableSchema } from 'graphql-tools';
+
 import { resolvers as bookResolver } from './Book/resolvers';
-import { typeDefs as bookTypeDefs } from './Book/typeDefs';
+import { typeDefs as Book } from './Book/typeDefs';
+import { resolvers as userResolver } from './User/resolvers';
+import { typeDefs as User } from './User/typeDefs';
 
-const typeDefs = [bookTypeDefs];
-const resolvers = [bookResolver];
+const Query = `
+  type Query {
+    _empty: String
+  }
+  type Mutation {
+    _empty: String
+  }
+`;
 
-export { typeDefs, resolvers };
+const schema = makeExecutableSchema({
+  typeDefs: [Query, Book, User],
+  resolvers: merge(bookResolver, userResolver),
+});
+
+export default schema;
