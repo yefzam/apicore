@@ -32,9 +32,9 @@ export const resolvers = {
           id: user.id,
           email: user.email,
         },
-        'my-secret-from-env-file-in-prod',
+        'secret-to-be-defined',
         {
-          expiresIn: '30d', // token will expire in 30days
+          expiresIn: '1d', // token will expire in 1 day
         }
       );
       return {
