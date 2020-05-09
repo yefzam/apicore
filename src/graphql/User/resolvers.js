@@ -1,6 +1,5 @@
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
-
+import { generateToken } from './../../utils/';
 import User from '../../models/User';
 
 export const resolvers = {
@@ -27,16 +26,8 @@ export const resolvers = {
         throw new Error('Invalid Login');
       }
 
-      const token = jwt.sign(
-        {
-          id: user.id,
-          email: user.email,
-        },
-        'secret-to-be-defined',
-        {
-          expiresIn: '1d', // token will expire in 1 day
-        }
-      );
+      const token = generateToken(user);
+
       return {
         token,
         user,

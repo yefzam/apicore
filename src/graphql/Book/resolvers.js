@@ -1,4 +1,5 @@
 import Book from '../../models/Book';
+import { refreshToken } from './../../utils/';
 
 export const resolvers = {
   Query: {
@@ -7,7 +8,9 @@ export const resolvers = {
     },
   },
   Mutation: {
-    createBook: async (_, { title, content, author }) => {
+    createBook: async (_, { title, content, author }, context) => {
+      console.log('---', context);
+      refreshToken(context.user);
       const newBook = new Book({ title, content, author });
       return await newBook.save();
     },
